@@ -10,7 +10,7 @@ int main(){
       case 0:
         break;
       case 1:
-        printf("Oi\n");
+        printf("Oie\n");
     }
   }
   return 0;
