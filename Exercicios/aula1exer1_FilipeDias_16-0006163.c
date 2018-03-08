@@ -15,7 +15,21 @@ typedef struct proprietario{
 FILE *fp;
 
 void cadastraProprietario(proprietario *p){
-  fp = fopen("data.txt", "a+");
+  size_t tamanho_arq;
+  int opcao = 1;
+  fp = fopen("data.txt","a+");
+  if(fp != NULL){
+    tamanho_arq = ftell(fp);
+    if(tamanho_arq == 0){
+    fseek(fp, 0, SEEK_END);
+    tamanho_arq = ftell(fp);
+    }
+  }
+  if(tamanho_arq == 0){
+      fprintf(fp, "CPF           ");
+      fprintf(fp, "CHASSI                 ");
+      fprintf(fp, "\n");
+    }
   printf("Insira o CPF: ");
   scanf(" %[^\n]",p->cpf);
   // p->status = 0;
@@ -30,20 +44,6 @@ void cadastraProprietario(proprietario *p){
 
 int main(){
   proprietario p;
-  fp = fopen("data.txt","a+w");
-  if(fp != NULL){
-    int tamanho;
-    tamanho = ftell(fp);
-    if(tamanho == 0){
-      fseek(fp, 0, SEEK_END);
-      fprintf(fp, "\n");
-    } else {
-      fprintf(fp, "CPF           ");
-      fprintf(fp, "CHASSI                 ");
-      fprintf(fp, "\n");
-    }
-  }
-  fclose(fp);
   int opcao = 1;
   while(opcao != 0){
     system("cls");
