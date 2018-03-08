@@ -7,22 +7,35 @@ typedef struct carro{
 }carro;
 
 typedef struct proprietario{
-  int cpf;
-  char nome[30];
+  char cpf[11];
   struct carro veiculo;
   int status;
 }proprietario;
 
+FILE *fp;
+
 void cadastraProprietario(proprietario *p){
+  fp = fopen("data.txt", "a+");
   printf("Insira o CPF: ");
-  scanf("%d",&p->cpf);
+  scanf(" %[^\n]",p->cpf);
+  // p->status = 0;
+  fprintf(fp, p->cpf);
+  fprintf(fp, "   ");
   printf("Insira o Chassi do Carro: ");
   scanf(" %[^\n]",p->veiculo.chassi);
-  p->status = 0;
+  fprintf(fp, p->veiculo.chassi);
+  fprintf(fp, "\n");
+  fclose(fp);
+
 }
 
 int main(){
   proprietario p;
+  fp = fopen("data.txt","w+");
+  fprintf(fp, "CPF           ");
+  fprintf(fp, "CHASSI                 ");
+  fprintf(fp, "\n");
+  fclose(fp);
   int opcao = 1;
   while(opcao != 0){
     system("cls");
@@ -44,7 +57,6 @@ int main(){
         break;
     }
   }
-  // system("cls");
-  // printf("%d %s\n",p.cpf, p.veiculo.chassi);
+
   return 0;
 }
