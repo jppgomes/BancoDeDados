@@ -26,15 +26,23 @@ void cadastraProprietario(proprietario *p){
   fprintf(fp, p->veiculo.chassi);
   fprintf(fp, "\n");
   fclose(fp);
-
 }
 
 int main(){
   proprietario p;
-  fp = fopen("data.txt","w+");
-  fprintf(fp, "CPF           ");
-  fprintf(fp, "CHASSI                 ");
-  fprintf(fp, "\n");
+  fp = fopen("data.txt","a+w");
+  if(fp != NULL){
+    int tamanho;
+    tamanho = ftell(fp);
+    if(tamanho == 0){
+      fseek(fp, 0, SEEK_END);
+      fprintf(fp, "\n");
+    } else {
+      fprintf(fp, "CPF           ");
+      fprintf(fp, "CHASSI                 ");
+      fprintf(fp, "\n");
+    }
+  }
   fclose(fp);
   int opcao = 1;
   while(opcao != 0){
