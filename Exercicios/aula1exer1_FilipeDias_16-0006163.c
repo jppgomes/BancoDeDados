@@ -45,7 +45,7 @@ void cadastraProprietario(proprietario *p){
   scanf(" %[^\n]",p->veiculo.chassi);
   // fprintf(fp, p->veiculo.chassi);
   fwrite(p->veiculo.chassi, 18, 1, fp);
-  fprintf(fp, "\\");
+  // fprintf(fp, "\\");
   fclose(fp);
 }
 
