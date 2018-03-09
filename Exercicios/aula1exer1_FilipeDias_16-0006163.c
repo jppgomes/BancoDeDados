@@ -48,26 +48,24 @@ void cadastraProprietario(proprietario *p){
   fclose(fp);
 }
 
-void leProprietarioCPF(char cpf[11]){
+void achaCarros(char* cpf){
   FILE *fp;
   int contador = 0;
-  char comparaCPF[11];
-
-  strcpy(comparaCPF, "");
-  printf("%d\n",strlen(comparaCPF));
-  fp = fopen("data.txt", "r");
-  fread(comparaCPF, 10, 1, fp);
-  // if(strcmp(comparaCPF,cpf) == 0){
-  //   printf("Iguais\n");
-  // }
-  fclose(fp);
-  printf("%s\n",comparaCPF);
-  printf("%d\n",strlen(comparaCPF));
+  char* comparaCPF = malloc(11);
+  char* chassi = malloc(17);
+  fp = fopen("data.txt", "rb");
+  while(fread(comparaCPF, 11, 1, fp)){
+    fread(chassi, 17, 1, fp);
+    if(strcmp(comparaCPF,cpf) == 0){
+      printf("%s\n", chassi);
+    }
+  }
 }
 
 int main(){
   proprietario p;
   int opcao = 1;
+  char cpf[11];
   while(opcao != 0){
     // system("cls");
     printf("MENU\n");
@@ -86,7 +84,9 @@ int main(){
         break;
       case 2:
         system("cls");
-        leProprietarioCPF("04590615185");
+        printf("CPF: ");
+        scanf("%s",cpf);
+        achaCarros(cpf);
         break;
       default:
         printf("Insira uma opcao valida\n");
