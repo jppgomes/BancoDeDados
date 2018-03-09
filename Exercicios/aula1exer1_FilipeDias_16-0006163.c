@@ -31,7 +31,7 @@ void cadastraProprietario(proprietario *p){
   scanf("%d",&p->n_Carros);
   // fwrite(n_Carro, 1, 1, fp);
   // fprintf(fp, "%d ", p->n_Carros);
-  do {
+  // do {
     printf("Insira o Chassi do Carro(%d): ",contador);
     scanf(" %[^\n]",p->veiculo.chassi);
     if(strlen(p->veiculo.chassi) < 17 || strlen(p->veiculo.chassi) > 17){
@@ -41,8 +41,8 @@ void cadastraProprietario(proprietario *p){
       } while(strlen(p->veiculo.chassi) < 17 || strlen(p->veiculo.chassi) > 17);
     }
     fwrite(p->veiculo.chassi, 18, 1, fp);
-    contador++;
-  } while(contador <= p->n_Carros);
+    // contador++;
+  // } while(contador <= p->n_Carros);
   fclose(fp);
 }
 
@@ -63,7 +63,7 @@ void achaCarros(char* cpf){
         //   printf("_");
         //   divisorLinha++;
         // }
-        system("cls");
+        // system("cls");
         printf("\nCPF: %s \n",comparaCPF);
         printf("CHASSI: %s\n", chassi);
         // printf("%c\n", quantidade_char);
@@ -91,14 +91,14 @@ int main(){
     scanf("%d",&opcao);
     switch (opcao) {
       case 0:
-        system("cls");
+        // system("cls");
         break;
       case 1:
-        system("cls");
+        // system("cls");
         cadastraProprietario(&p);
         break;
       case 2:
-        system("cls");
+        // system("cls");
         printf("CPF: ");
         scanf("%s",cpf);
         fflush(stdin);
