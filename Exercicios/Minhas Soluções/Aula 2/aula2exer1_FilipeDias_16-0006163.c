@@ -34,11 +34,11 @@ int main(){
     scanf("%d",&opcao);
     switch (opcao) {
       case 0:
-        printf("Bye! :)");
-        system("cls");
+        printf("Bye! :)\n");
         break;
       case 1:
         insereProprietario(&p);
+        setbuf(stdin, NULL);
         break;
       case 2:
         printf("Insira o CPF do proprietario: ");
@@ -60,19 +60,22 @@ void insereProprietario(proprietario *p){
     } while(strlen(p->cpf) < 11 || strlen(p->cpf) > 11);
   }
   fwrite(p->cpf, 12, 1, fp);
+  fprintf(fp, " ");
   printf("Insira o Nome do proprietario: ");
   scanf(" %[^\n]",p->nome);
   if(strlen(p->nome) < 10){
-    fprintf(fp, "0%d", strlen(p->nome));
+    fprintf(fp, "0%lu", strlen(p->nome));
   }
   if(strlen(p->nome) >= 10){
-    fprintf(fp, "%d ", strlen(p->nome));
+    fprintf(fp, "%lu ", strlen(p->nome));
   }
   fwrite(p->nome, strlen(p->nome) + 1, 1, fp);
+  fprintf(fp, " ");
   printf("Insira o Endereco do proprietario: ");
   scanf(" %[^\n]",p->endereco);
-  fprintf(fp, "%d ", strlen(p->endereco));
+  fprintf(fp, "%lu ", strlen(p->endereco));
   fwrite(p->endereco, strlen(p->endereco) + 1, 1, fp);
+  fprintf(fp, "\n");
   /* fwrite(variavel que vai escrever, quantos bytes, quantas vezes, qual arquivo) */
   fclose(fp);
 }
@@ -85,10 +88,10 @@ void leDadosProprietario(char cpf[12]){
   char enderecoNum[100];
   int tamNome, tamEndereco;
   fp = fopen("data.txt", "rb+");
-  while(fread(compara_cpf, 12, 1, fp)){
+  while(fread(compara_cpf, 13, 1, fp)){
     fread(nomeNum, 3, 1, fp);
     tamNome = atof(nomeNum);
-    fread(nome, tamNome + 1, 1, fp);
+    fread(nome, tamNome + 2, 1, fp);
     fread(enderecoNum, 3, 1, fp);
     tamEndereco = atof(enderecoNum);
     fread(endereco, tamEndereco + 1, 1, fp);
